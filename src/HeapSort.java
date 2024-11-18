@@ -2,8 +2,55 @@ import java.util.Arrays;
 
 public class HeapSort {
     public static void heapSort(Integer[] values) {
-        // Intentionally not implemented -- see homework assignmnet
-        throw new UnsupportedOperationException("Not yet implemented.");
+        int n = values.length;
+
+        // Step 1: Build a max-heap from the array
+        for (int i = n / 2 - 1; i >= 0; i--) {
+            heapify(values, n, i);
+        }
+
+        // Step 2: Extract elements one by one from the heap
+        for (int i = n - 1; i > 0; i--) {
+            // Move the current root (smallest) to the end of the array
+            swap(values, 0, i);
+
+            // Call the heapify on the reduced heap
+            heapify(values, i, 0);
+
+        }
+
+       
+}
+
+    private static void heapify(Integer[] values, int n, int i) {
+            int smallest = i; // Assume the root is the smallest
+            int left = 2 * i + 1; // Left child index
+            int right = 2 * i + 2; // Right child index
+
+            // If the left child is smaller than the root
+            if (left < n && values[left] < values[smallest]) {
+                smallest = left;
+            }
+
+            // If the right child is smaller than the smallest so far
+            if (right < n && values[right] < values[smallest]) {
+                smallest = right;
+            }
+
+            // If the smallest is not the root
+            if (smallest != i) {
+                swap(values, i, smallest);
+
+                // Recursively heapify the affected sub-tree
+                heapify(values, n, smallest);
+            }
+
+    }
+    
+    private static void swap(Integer[] values, int i, int j) {
+            int temp = values[i];
+            values[i] = values[j];
+            values[j] = temp;
     }
 
     public static void main(String[] args) {
