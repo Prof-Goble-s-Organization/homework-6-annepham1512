@@ -4,17 +4,14 @@ public class HeapSort {
     public static void heapSort(Integer[] values) {
         int n = values.length;
 
-        // Step 1: Build a max-heap from the array
+        
         for (int i = n / 2 - 1; i >= 0; i--) {
             heapify(values, n, i);
         }
 
-        // Step 2: Extract elements one by one from the heap
+        
         for (int i = n - 1; i > 0; i--) {
-            // Move the current root (smallest) to the end of the array
             swap(values, 0, i);
-
-            // Call the heapify on the reduced heap
             heapify(values, i, 0);
 
         }
